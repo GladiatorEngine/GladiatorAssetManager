@@ -33,8 +33,8 @@ public struct GladiatorAssetManager {
         var position = 0
         while position < packData.endIndex {
             let length: Int = packData.subdata(in: position..<position+MemoryLayout<Int>.size).withUnsafeBytes {$0.pointee}
-            let asset = try loadAssetFromData(data: packData.subdata(in: position+128..<position+128+length), hashed: false)
-            position = position+128+length
+            let asset = try loadAssetFromData(data: packData.subdata(in: position+64..<position+64+length), hashed: false)
+            position = position+64+length
             
             switch asset.0 {
             case .texture:
@@ -58,11 +58,11 @@ public struct GladiatorAssetManager {
         let assetTypeByte: UInt8 = fullAsset.subdata(in: 0..<2).withUnsafeBytes {$0.pointee}
         
         guard let assetType = AssetType(rawValue: assetTypeByte) else {throw AssetLoadErrors.failedToParseType(byte: assetTypeByte)}
-        let data = fullAsset.subdata(in: 2..<(hashed ? fullAsset.endIndex-128 : fullAsset.endIndex))
+        let data = fullAsset.subdata(in: 2..<(hashed ? fullAsset.endIndex-64 : fullAsset.endIndex))
         
         if hashed {
             // Verify data with hash
-            let hash = fullAsset.subdata(in: fullAsset.endIndex-128..<fullAsset.endIndex)
+            let hash = fullAsset.subdata(in: fullAsset.endIndex-64..<fullAsset.endIndex)
             if Data() + SHA512.hash(data: data) != hash {
                 fatalError("Asset hash is not valid!")
             }
