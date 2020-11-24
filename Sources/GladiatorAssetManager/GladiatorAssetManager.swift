@@ -55,10 +55,10 @@ public struct GladiatorAssetManager {
     }
     
     private func loadAssetFromData(data fullAsset: Data, hashed: Bool = true) throws -> (AssetType, Data) {
-        let assetTypeByte: UInt8 = fullAsset.subdata(in: 0..<2).withUnsafeBytes {$0.pointee}
+        let assetTypeByte: UInt8 = fullAsset.subdata(in: 0..<1).withUnsafeBytes {$0.pointee}
         
         guard let assetType = AssetType(rawValue: assetTypeByte) else {throw AssetLoadErrors.failedToParseType(byte: assetTypeByte)}
-        let data = fullAsset.subdata(in: 2..<(hashed ? fullAsset.endIndex-64 : fullAsset.endIndex))
+        let data = fullAsset.subdata(in: 1..<(hashed ? fullAsset.endIndex-64 : fullAsset.endIndex))
         
         if hashed {
             // Verify data with hash
