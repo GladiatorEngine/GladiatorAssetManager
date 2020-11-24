@@ -8,10 +8,10 @@
 import Foundation
 
 public enum AssetType: UInt8, Codable {
-    case texture = 0x00 // Texture
-    case model = 0x01 // Model
-    case animation = 0x02 // Animation
-    case intelligence = 0x03 // Intelligence description
+    case texture = 0xAA // Texture
+    case model = 0xBB // Model
+    case animation = 0xCC // Animation
+    case intelligence = 0xDD // Intelligence description
     
-    case pack = 0xAA // Combined pack of assets
+    case pack = 0xEE // Combined pack of assets
 }
