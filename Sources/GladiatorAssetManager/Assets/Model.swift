@@ -30,7 +30,9 @@ public struct Model: Asset {
         data = data + withUnsafeBytes(of: self.vertices.count) { Data($0) }
         
         for vertex in self.vertices {
-            data = data + withUnsafeBytes(of: vertex) { Data($0) }
+            for f in vertex {
+                data = data + withUnsafeBytes(of: f) { Data($0) }
+            }
         }
         
         return data
