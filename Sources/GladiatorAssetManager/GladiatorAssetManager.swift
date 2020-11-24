@@ -25,7 +25,7 @@ public struct GladiatorAssetManager {
             
             guard let assetType = AssetType(rawValue: assetTypeByte) else {throw AssetLoadErrors.failedToParseType(byte: assetTypeByte)}
             
-            return (assetType, fullAsset.subdata(in: 2..<fullAsset.endIndex))
+            return (assetType, fullAsset.subdata(in: 2..<fullAsset.endIndex-128))
         } catch let e {
             fatalError("Cannot load asset: \(e)")
         }
