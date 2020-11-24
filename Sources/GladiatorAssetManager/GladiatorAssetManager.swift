@@ -2,7 +2,7 @@ import Foundation
 import Crypto
 
 public struct GladiatorAssetManager {
-    var textures: [Texture] = []
+    public private(set) var textures: [Texture] = []
     
     public init() {
         
