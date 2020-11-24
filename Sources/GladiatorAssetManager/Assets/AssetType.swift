@@ -12,4 +12,6 @@ public enum AssetType: UInt8, Codable {
     case model = 0x01 // Model
     case animation = 0x02 // Animation
     case intelligence = 0x03 // Intelligence description
+    
+    case pack = 0xAA // Combined pack of assets
 }

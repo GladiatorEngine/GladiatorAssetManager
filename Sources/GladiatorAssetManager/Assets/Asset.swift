@@ -9,4 +9,6 @@ import Foundation
 
 public protocol Asset: Codable {
     init(sourceData: Data)
+    func assetData() -> Data
+    func assetType() -> AssetType
 }
