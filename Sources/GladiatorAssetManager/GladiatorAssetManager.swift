@@ -1,4 +1,5 @@
 import Foundation
+import Crypto
 
 public struct GladiatorAssetManager {
     var textures: [Texture] = []
@@ -33,7 +34,8 @@ public struct GladiatorAssetManager {
     public static func saveAsset(path: String, type: AssetType, data: Data) {
         do {
             let typeByteData = Data([type.rawValue])
-            let fullData = typeByteData + data
+            let hash = SHA512.hash(data: data)
+            let fullData = typeByteData + data + hash
             try fullData.write(to: URL(fileURLWithPath: path))
         } catch let e {
             fatalError("Failed to save asset: \(e)")
