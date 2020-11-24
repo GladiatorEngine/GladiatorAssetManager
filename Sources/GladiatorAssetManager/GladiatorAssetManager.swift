@@ -18,9 +18,7 @@ public struct GladiatorAssetManager {
     
     private func loadAsset(path: String) -> (AssetType, Data) {
         do {
-            guard let url = URL(string: path) else {throw AssetLoadErrors.failedToParseURL(path: path)}
-            
-            let fullAsset = try Data(contentsOf: url)
+            let fullAsset = try Data(contentsOf: URL(fileURLWithPath: path))
             
             let assetTypeByte: UInt8 = fullAsset.subdata(in: 0..<2).withUnsafeBytes {$0.pointee}
             
@@ -36,9 +34,7 @@ public struct GladiatorAssetManager {
         do {
             let typeByteData = Data([type.rawValue])
             let fullData = typeByteData + data
-            
-            guard let url = URL(string: path) else {throw AssetLoadErrors.failedToParseURL(path: path)}
-            try fullData.write(to: url)
+            try fullData.write(to: URL(fileURLWithPath: path))
         } catch let e {
             fatalError("Failed to save asset: \(e)")
         }

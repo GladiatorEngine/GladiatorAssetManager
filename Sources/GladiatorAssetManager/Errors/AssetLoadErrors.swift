@@ -8,6 +8,5 @@
 import Foundation
 
 public enum AssetLoadErrors: Error {
-    case failedToParseURL(path: String)
     case failedToParseType(byte: UInt8)
 }
