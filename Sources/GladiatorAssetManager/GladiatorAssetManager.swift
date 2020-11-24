@@ -76,7 +76,7 @@ public struct GladiatorAssetManager {
         
         for asset in assets {
             let aData = asset.assetData()
-            var length: Int = aData.endIndex
+            var length: Int = aData.count
             data = data + Data([asset.assetType().rawValue]) + Data(withUnsafeBytes(of: length.littleEndian, Array.init)) + aData
         }
         
