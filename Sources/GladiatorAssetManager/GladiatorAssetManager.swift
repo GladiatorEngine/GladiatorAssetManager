@@ -83,6 +83,10 @@ public struct GladiatorAssetManager {
         return data
     }
     
+    public static func saveAsset(path: String, asset: Asset) {
+        return saveAsset(path: path, type: asset.assetType(), data: asset.assetData())
+    }
+    
     public static func saveAsset(path: String, type: AssetType, data: Data) {
         do {
             let typeByteData = Data([type.rawValue])
