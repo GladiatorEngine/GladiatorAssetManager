@@ -33,8 +33,8 @@ public struct GladiatorAssetManager {
         var position = 0
         while position < packData.endIndex {
             let length: Int = packData.subdata(in: position..<position+MemoryLayout<Int>.size).withUnsafeBytes {$0.pointee}
-            let asset = try loadAssetFromData(data: packData.subdata(in: position+64..<position+64+length), hashed: false)
-            position = position+64+length
+            let asset = try loadAssetFromData(data: packData.subdata(in: position+MemoryLayout<Int>.size..<position+MemoryLayout<Int>.size+length), hashed: false)
+            position = position+MemoryLayout<Int>.size+length
             
             switch asset.0 {
             case .texture:
