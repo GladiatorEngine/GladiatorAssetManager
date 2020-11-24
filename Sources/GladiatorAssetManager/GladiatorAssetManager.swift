@@ -3,6 +3,7 @@ import Crypto
 
 public struct GladiatorAssetManager {
     public private(set) var textures: [Texture] = []
+    public private(set) var models: [Model] = []
     
     public init() {
         
@@ -19,6 +20,19 @@ public struct GladiatorAssetManager {
     
     public mutating func loadTextureAsset(data: Data) throws {
         self.textures.append(Texture(sourceData: data))
+    }
+    
+    public mutating func loadModelAsset(path: String) throws {
+        let assetTuple = try self.loadAsset(path: path)
+        if assetTuple.0 != .model {
+            fatalError("\(path) is not a model")
+        }
+        
+        try loadModelAsset(data: assetTuple.1)
+    }
+    
+    public mutating func loadModelAsset(data: Data) throws {
+        self.models.append(Model(sourceData: data))
     }
     
     public mutating func loadAssetPack(path: String) throws {
@@ -39,6 +53,9 @@ public struct GladiatorAssetManager {
             switch asset.0 {
             case .texture:
                 try self.loadTextureAsset(data: asset.1)
+                break
+            case .model:
+                try self.loadModelAsset(data: asset.1)
                 break
             case .pack:
                 fatalError("Asset pack can't contain another asset pack in it")
