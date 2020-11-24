@@ -12,10 +12,12 @@ public struct Model: Asset {
         let amountOfVertices: Int = sourceData.subdata(in: 0..<MemoryLayout<Int>.size).withUnsafeBytes {$0.pointee}
         var vertices = [[Float]]()
         for i in 0..<amountOfVertices {
+            var f = [Float]()
             for j in 0..<4 {
                 let pos = MemoryLayout<Int>.size + MemoryLayout<Float>.size * ((i+1)*(j+1)-1)
-                vertices.append(sourceData.subdata(in: pos..<pos+MemoryLayout<Float>.size).withUnsafeBytes {$0.pointee})
+                f.append(sourceData.subdata(in: pos..<pos+MemoryLayout<Float>.size).withUnsafeBytes {$0.pointee})
             }
+            vertices.append(f)
         }
         self.vertices = vertices
     }
