@@ -6,7 +6,7 @@ final class GladiatorAssetManagerTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(GladiatorAssetManager().text, "Hello, World!")
+        //XCTAssertEqual(GladiatorAssetManager().text, "Hello, World!")
     }
 
     static var allTests = [
